@@ -1,0 +1,13 @@
+Dockerfile
+.dockerignore
+node_modules
+*.log
+*.md
+dist
+.gitignore
+.prettierrc
+devops
+docs
+.vscode
+.azuredevops/*
+.catalog/*

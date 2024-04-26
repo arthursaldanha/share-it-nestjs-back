@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "src",
+  "entryFile": "./dev-infra.js",
+  "compilerOptions": {
+    "assets": ["**/*.env", "**/dev-infra.ts"],
+    "deleteOutDir": true
+  }
+}

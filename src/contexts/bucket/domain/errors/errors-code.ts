@@ -1,0 +1,4 @@
+export enum ErrorCode {
+  CONTENT_TYPE_NOT_ALLOWED = 10001,
+  FILE_NOT_FOUND = 10002,
+}
