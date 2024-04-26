@@ -12,9 +12,6 @@ O projeto utliza DDD Domain-Driven Design (DDD) que é uma abordagem para desenv
 
 Dentro da pasta contexts você vai encontrar os contextos que esse serviço aborda em nosso negócio. Sempre se pergunte se oque você esta desenvolvendo pertence ao contexto que você decidiu usar.
 
-As camadas do projeto dependem uma da outra da seguinte forma:
-![Alt text](docs/img/ddd-service-layer-dependencies.png)
-
 ## Camadas do DDD
 
 1. **Camada de Aplicação**: Responsável por coordenar a interação entre os diferentes componentes da aplicação e interfaces para o mudo externo.
@@ -22,8 +19,6 @@ As camadas do projeto dependem uma da outra da seguinte forma:
 2. **Camada de Domínio**: Contém as regras de negócio e a lógica do domínio, incluindo entidades, objetos de valor e agregados.
 
 3. **Camada de Infraestrutura**: Lida com detalhes de implementação, como banco de dados e outros serviços.
-
-![Alt text](docs/img/domain-driven-design-microservice.png)
 
 ## Vantagens do DDD
 
@@ -52,7 +47,7 @@ Para saber mais sobre cada camada consulte o artigo em: [DDD com a Microsoft](ht
 
 [Nest](https://github.com/nestjs/nest) Nest.js com TypeScript
 
-## Configuração
+## Setup
 
 ```bash
 # install dependencies
