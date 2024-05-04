@@ -12,9 +12,7 @@ const makeSut = () => {
   return { sut };
 };
 
-const makeValidInput = () => ({
-  id: 'valid_id',
-});
+const makeValidInput = () => 'valid_id';
 
 describe('GetPreSignedUrlService', () => {
   beforeEach(() => {
@@ -42,7 +40,7 @@ describe('GetPreSignedUrlService', () => {
     jest.spyOn(fileRepositoryStub, 'getById').mockResolvedValueOnce(null);
 
     const input = makeValidInput();
-    const error = new FileNotFoundError(input.id);
+    const error = new FileNotFoundError(input);
 
     await expect(sut.execute(input)).rejects.toThrow(error);
   });
@@ -68,7 +66,7 @@ describe('GetPreSignedUrlService', () => {
     const input = makeValidInput();
     await sut.execute(input);
 
-    expect(fileRepositorySpy).toHaveBeenCalledWith(input.id);
+    expect(fileRepositorySpy).toHaveBeenCalledWith(input);
   });
 
   it('should call cloudflareBucketProvider.getPreSignedUrl with correct values', async () => {

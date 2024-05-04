@@ -14,7 +14,7 @@ const makeSut = () => {
 
 const makeValidInput = () => ({
   name: 'valid_name',
-  contentType: 'application/pdf',
+  contentType: 'pdf',
 });
 
 const makeInvalidInputWithContentType = () => ({
@@ -24,7 +24,7 @@ const makeInvalidInputWithContentType = () => ({
 
 const makeInvalidInputWithName = () => ({
   name: '',
-  contentType: 'application/pdf',
+  contentType: 'pdf',
 });
 
 describe('CreatePreSignedUrlService', () => {
