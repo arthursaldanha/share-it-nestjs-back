@@ -17,9 +17,7 @@ export class ContentType {
 
   private validateContentType(contentType: string): boolean {
     const allowedFormats = ['pdf', 'jpeg', 'png'];
-    const contentTypeFormated = contentType.split('/')[1] as string;
-
-    return allowedFormats.includes(contentTypeFormated);
+    return allowedFormats.includes(contentType);
   }
 
   getValue(): string {

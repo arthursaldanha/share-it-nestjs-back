@@ -12,6 +12,7 @@ import { ZodError } from 'zod';
 import {
   OperationalError,
   ContentTypeNotAllowedError,
+  FileNotFoundError,
 } from '@/contexts/bucket/domain/errors';
 
 @Catch()
@@ -57,6 +58,9 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
       case ContentTypeNotAllowedError:
         return HttpStatus.BAD_REQUEST;
+
+      case FileNotFoundError:
+        return HttpStatus.NOT_FOUND;
 
       default:
         return HttpStatus.INTERNAL_SERVER_ERROR;

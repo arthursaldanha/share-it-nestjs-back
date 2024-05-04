@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, Matches } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class CreatePreSignedUrlRequestDTO {
   @ApiProperty({
@@ -8,16 +8,15 @@ export class CreatePreSignedUrlRequestDTO {
     example: 'example.pdf',
   })
   @IsString()
+  @IsNotEmpty()
   name!: string;
 
   @ApiProperty({
     description: 'Formato do arquivo',
     type: String,
-    example: 'application/pdf',
+    example: 'pdf',
   })
   @IsString()
-  @Matches(/\w+\/[-+.\w]+/, {
-    message: 'O formato do arquivo deve seguir o padrão MIME (RFC 6838).',
-  })
+  @IsNotEmpty()
   contentType!: string;
 }

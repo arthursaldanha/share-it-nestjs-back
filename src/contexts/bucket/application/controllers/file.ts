@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
 import {
   ApiExtraModels,
   ApiOperation,
@@ -13,7 +13,6 @@ import { ErrorDto } from '@/contexts/shared/application/dtos/error.dto';
 import {
   CreatePreSignedUrlRequestDTO,
   CreatePreSignedUrlResponseDTO,
-  GetPreSignedUrlRequestDTO,
   GetPreSignedUrlResponseDTO,
 } from '@/contexts/bucket/application/dtos';
 import {
@@ -61,8 +60,8 @@ export class FilesController {
     status: 200,
     schema: { $ref: getSchemaPath(GetPreSignedUrlResponseDTO) },
   })
-  @Get()
-  async get(@Body() body: GetPreSignedUrlRequestDTO) {
-    return await this.getPreSignedUrl.execute(body);
+  @Get(':fileId')
+  async get(@Param('fileId') id: string) {
+    return await this.getPreSignedUrl.execute(id);
   }
 }

@@ -21,7 +21,7 @@ export class CreatePreSignedUrlService {
 
       const { id } = uploadFile.toJSON();
 
-      return { signedUrl, id };
+      return { id, signedUrl };
     } catch (error) {
       throw error;
     }
