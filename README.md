@@ -1,14 +1,14 @@
 # Share It
 
-O Share It é uma aplicação para compartilhamento de arquivos de forma segura e eficiente. Com o Share It, os usuários podem fazer upload de arquivos para um armazenamento em nuvem, como o Cloudflare Bucket, utilizando URLs pré-assinadas. Isso permite que os usuários compartilhem arquivos diretamente do seu dispositivo para o armazenamento em nuvem, sem precisar passar pelos servidores da aplicação e sem realizar autenticações. Ou seja, sem burocracia.
+O Share It é uma aplicação para compartilhamento de arquivos de forma segura e eficiente. Com o Share It, os usuários podem fazer uploads de arquivos para um armazenamento em nuvem utilizando o Cloudflare Bucket através de URLs pré-assinadas. Isso permite que os usuários compartilhem arquivos diretamente do seu dispositivo para o armazenamento em nuvem sem realizar autenticações. Ou seja, sem burocracia.
 
 ## Visão Geral
 
-Esta seção fornece uma visão geral do projeto, incluindo seu propósito, contexto e principais recursos.
+Basicamente a aplicação tem por objetivo facilitar o compartilhamento de arquivos. Logo, se você não possui um Google Drive ou Whatsapp Web por perto para compartilhar seus arquivos entre o PC e Smartphone, basta utilizar o share-it. Legal né?
 
 ## Arquitetura
 
-O projeto utliza DDD Domain-Driven Design (DDD) que é uma abordagem para desenvolvimento de software que se concentra na modelagem do domínio do problema em questão. É uma metodologia que visa tornar o código mais alinhado com o mundo real, tornando-o mais compreensível e mantível.
+O projeto utliza Domain-Driven Design (DDD) que é uma abordagem para desenvolvimento de software que se concentra na modelagem do domínio do problema em questão. É uma metodologia que visa tornar o código mais alinhado com o mundo real, tornando-o mais compreensível e mantível.
 
 Dentro da pasta contexts você vai encontrar os contextos que esse serviço aborda em nosso negócio. Sempre se pergunte se oque você esta desenvolvendo pertence ao contexto que você decidiu usar.
 
@@ -45,7 +45,9 @@ Para saber mais sobre cada camada consulte o artigo em: [DDD com a Microsoft](ht
 
 ## Tecnologias
 
-[Nest](https://github.com/nestjs/nest) Nest.js com TypeScript
+[Nest](https://nestjs.com/) Nest.js com TypeScript
+[Jest](https://jestjs.io/pt-BR/) Testes unitários e E2E com Jest
+[TestContainers](https://testcontainers.com/) Nest.js com TypeScript
 
 ## Setup
 
