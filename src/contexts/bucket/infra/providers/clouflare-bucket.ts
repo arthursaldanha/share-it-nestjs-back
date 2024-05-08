@@ -1,5 +1,9 @@
 import { S3Client } from '@aws-sdk/client-s3';
-import { GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3';
+import {
+  GetObjectCommand,
+  PutObjectCommand,
+  DeleteObjectCommand,
+} from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
 import { UploadFile } from '@/contexts/bucket/domain/upload/upload-file';
@@ -57,6 +61,21 @@ export class CloudflareBucketProvider implements CloudflareBucket {
     } catch (error) {
       console.log(error);
       throw new Error('Não foi possível obter a URL de upload');
+    }
+  }
+
+  async removeFile(uploadFile: UploadFile): Promise<void> {
+    try {
+      await getSignedUrl(
+        this.bucketS3Client,
+        new DeleteObjectCommand({
+          Bucket: 'drop-it-hml',
+          Key: uploadFile.key,
+        }),
+      );
+    } catch (error) {
+      console.log(error);
+      throw new Error('Não foi possível remover o arquivo do Bucket');
     }
   }
 }

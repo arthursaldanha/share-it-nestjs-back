@@ -3,6 +3,7 @@ export const ioc = {
     services: {
       createPreSignedUrl: Symbol('CreatePreSignedUrlService'),
       getPreSignedUrl: Symbol('GetPreSignedUrlService'),
+      scheduleCleanupUpload: Symbol('ScheduleCleanupUploadService'),
     },
   },
   domain: {},

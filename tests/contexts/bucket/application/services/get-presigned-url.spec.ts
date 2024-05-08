@@ -45,6 +45,28 @@ describe('GetPreSignedUrlService', () => {
     await expect(sut.execute(input)).rejects.toThrow(error);
   });
 
+  it('should throw FileNotFoundError if file is older than 30 minutes', async () => {
+    const { sut } = makeSut();
+
+    const createdAt = new Date();
+    createdAt.setMinutes(createdAt.getMinutes() - 31);
+
+    const staleFile = UploadFile.restore(
+      'valid_id',
+      'valid_key',
+      'jpeg',
+      'valid_name',
+      createdAt,
+    );
+
+    jest.spyOn(fileRepositoryStub, 'getById').mockResolvedValueOnce(staleFile);
+
+    const input = makeValidInput();
+    const error = new FileNotFoundError(input);
+
+    await expect(sut.execute(input)).rejects.toThrow(error);
+  });
+
   it('should throw Error if cloudflareBucketProvider.getPreSignedUrl fails', async () => {
     const { sut } = makeSut();
     const error = new Error('Não foi possível obter a URL de upload');

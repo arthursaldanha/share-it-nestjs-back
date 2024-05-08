@@ -4,6 +4,8 @@ import { CloudflareBucket } from '@/contexts/bucket/domain/providers/clouflare-b
 import { FileNotFoundError } from '@/contexts/bucket/domain/errors/file-not-found';
 
 export class GetPreSignedUrlService {
+  TIME_IN_MINUTES: number = 30;
+
   constructor(
     private readonly filesRepository: FileRepository,
     private readonly cloudflareBucketProvider: CloudflareBucket,
@@ -13,7 +15,7 @@ export class GetPreSignedUrlService {
     try {
       const file = await this.filesRepository.getById(id);
 
-      if (!file) {
+      if (!file || this.isFileStale(file.createdAt)) {
         throw new FileNotFoundError(id);
       }
 
@@ -24,5 +26,13 @@ export class GetPreSignedUrlService {
     } catch (error) {
       throw error;
     }
+  }
+
+  private isFileStale(createdAt: Date): boolean {
+    const thresholdTime = new Date();
+
+    thresholdTime.setMinutes(thresholdTime.getMinutes() - this.TIME_IN_MINUTES);
+
+    return createdAt < thresholdTime;
   }
 }

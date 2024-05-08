@@ -6,4 +6,5 @@ export interface CloudflareBucket {
     expiresIn?: number,
   ): Promise<string>;
   getPreSignedUrl(uploadFile: UploadFile): Promise<string>;
+  removeFile(uploadFile: UploadFile): Promise<void>;
 }

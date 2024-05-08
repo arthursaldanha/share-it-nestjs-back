@@ -43,6 +43,35 @@ export class MySqlFilesRepository implements FileRepository {
     }
   }
 
+  async getOldUploadsByCreatedAt(
+    dateToFilter: Date,
+  ): Promise<UploadFile[] | null> {
+    try {
+      const uploadedFile = await this.mySqlClient.connection.file.findMany({
+        where: {
+          createdAt: {
+            lt: dateToFilter,
+          },
+        },
+      });
+
+      if (!uploadedFile) return null;
+
+      return uploadedFile.map((file) =>
+        UploadFile.restore(
+          file.id,
+          file.key,
+          file.contentType,
+          file.name,
+          file.createdAt,
+        ),
+      );
+    } catch (error) {
+      console.log(error);
+      throw new Error('Não foi possível obter os arquivos para limpeza');
+    }
+  }
+
   async remove(id: string): Promise<void> {
     try {
       await this.mySqlClient.connection.file.delete({
