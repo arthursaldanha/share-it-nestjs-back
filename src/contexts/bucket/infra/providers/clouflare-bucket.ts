@@ -66,8 +66,7 @@ export class CloudflareBucketProvider implements CloudflareBucket {
 
   async removeFile(uploadFile: UploadFile): Promise<void> {
     try {
-      await getSignedUrl(
-        this.bucketS3Client,
+      await this.bucketS3Client.send(
         new DeleteObjectCommand({
           Bucket: 'drop-it-hml',
           Key: uploadFile.key,

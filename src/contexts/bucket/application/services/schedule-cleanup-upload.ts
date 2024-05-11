@@ -24,7 +24,10 @@ export class ScheduleCleanUpUploadService {
         await this.cloudflareBucketProvider.removeFile(upload);
         await this.filesRepository.remove(upload.id);
 
-        console.log('arq removido :>> ', { id: upload.id, key: upload.key });
+        console.log('arquivo removido :>> ', {
+          id: upload.id,
+          key: upload.key,
+        });
       }
     } catch (error) {
       throw error;
@@ -39,7 +42,7 @@ export class ScheduleCleanUpUploadService {
     return time;
   }
 
-  @Cron(CronExpression.EVERY_10_MINUTES)
+  @Cron(CronExpression.EVERY_5_MINUTES)
   async execute() {
     this.cleanupImages();
   }
