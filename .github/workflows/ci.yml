@@ -13,9 +13,20 @@ jobs:
     name: 'Run Tests'
     runs-on: ubuntu-latest
 
+    env:
+      CLOUDFLARE_ENDPOINT: 'CLOUDFLARE_ENDPOINT'
+      CLOUDFLARE_ACCESS_KEY_ID: 'CLOUDFLARE_ACCESS_KEY_ID'
+      CLOUDFLARE_SECRET_ACCESS_KEY: 'CLOUDFLARE_SECRET_ACCESS_KEY'
+
     steps:
     - name: Checkout
       uses: actions/checkout@v4
+
+    - name: Set environment variables
+      run: |
+        echo "CLOUDFLARE_ENDPOINT=$CLOUDFLARE_ENDPOINT" >> $GITHUB_ENV
+        echo "CLOUDFLARE_ACCESS_KEY_ID=$CLOUDFLARE_ACCESS_KEY_ID" >> $GITHUB_ENV
+        echo "CLOUDFLARE_SECRET_ACCESS_KEY=$CLOUDFLARE_SECRET_ACCESS_KEY" >> $GITHUB_ENV
 
     - name: Install PNPM
       run: npm install -g pnpm
@@ -32,6 +43,9 @@ jobs:
   build-and-push:
     name: 'Build and Push'
     runs-on: ubuntu-latest
+    needs: test
+
+    if: always()
 
     steps:
     - name: Checkout
