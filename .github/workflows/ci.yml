@@ -45,7 +45,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
 
-    if: always()
+    if: success() || failure()
 
     steps:
     - name: Checkout
