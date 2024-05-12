@@ -15,10 +15,10 @@ jobs:
 
     steps:
     - name: Checkout
-    - uses: actions/checkout@v4
+      uses: actions/checkout@v4
 
     - name: Generate SHA
-    - id: generate_sha
+      id: generate_sha
       run: |
         SHA=$(echo $GITHUB_SHA | head -c7)
         echo "sha=$SHA" >> $GITHUB_OUTPUT
