@@ -14,10 +14,10 @@
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest --ci --reporters=default --reporters=jest-junit --detectOpenHandles",
     "test:watch": "jest --watch",
-    "test:cov": "jest --coverage --coverageReporters=cobertura --coverageReporters=clover --coverageReporters=lcovonly --detectOpenHandles",
+    "test:cov": "jest --coverage --coverageReporters=cobertura --coverageReporters=clover --coverageReporters=lcovonly --detectOpenHandles --bail",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:unit": "jest --config jest.unit.config.ts --verbose --detectOpenHandles --forceExit",
-    "test:e2e": "jest --config jest.integration.config.ts --verbose --detectOpenHandles --forceExit"
+    "test:unit": "jest --config jest.unit.config.ts --verbose --detectOpenHandles --forceExit --bail",
+    "test:e2e": "jest --config jest.integration.config.ts --verbose --detectOpenHandles --forceExit --bail"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.507.0",
