@@ -2,7 +2,7 @@ import { UploadFile } from '@/contexts/bucket/domain/upload/upload-file';
 import { FileRepository } from '@/contexts/bucket/domain/upload/file-repository';
 import { MySqlClient } from '@/contexts/bucket/infra/adapters/mysql';
 
-export class MySqlFilesRepository implements FileRepository {
+export class PostgreSqlFilesRepository implements FileRepository {
   constructor(private readonly mySqlClient: MySqlClient) { }
 
   async save(uploadFile: UploadFile): Promise<void> {
@@ -57,14 +57,21 @@ export class MySqlFilesRepository implements FileRepository {
 
       if (!uploadedFile) return null;
 
-      return uploadedFile.map((file) =>
-        UploadFile.restore(
-          file.id,
-          file.key,
-          file.contentType,
-          file.name,
-          file.createdAt,
-        ),
+      return uploadedFile.map(
+        (file: {
+          id: string;
+          key: string;
+          contentType: string;
+          name: string;
+          createdAt: Date;
+        }) =>
+          UploadFile.restore(
+            file.id,
+            file.key,
+            file.contentType,
+            file.name,
+            file.createdAt,
+          ),
       );
     } catch (error) {
       console.log(error);

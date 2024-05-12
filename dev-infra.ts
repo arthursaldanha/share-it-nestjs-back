@@ -1,11 +1,11 @@
 import 'reflect-metadata';
 import 'dotenv/config';
 
-import { createMySqlContainer } from '@/tests/helpers/create-mysql-container';
+import { createPostgreSqlContainer } from '@/tests/helpers/create-postgresql-container';
 
 const createLocalStackContainer = async () => {
   try {
-    await createMySqlContainer();
+    await createPostgreSqlContainer();
   } catch (error) {
     console.log(error);
     throw error;

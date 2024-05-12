@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { config } from 'dotenv';
 import 'reflect-metadata';
-import { createMySqlContainer } from './tests/helpers/create-mysql-container';
+import { createPostgreSqlContainer } from './tests/helpers/create-postgresql-container';
 
 export default async () => {
   try {
     config({
       path: '.env.example',
     });
-    const { container } = await createMySqlContainer();
+    const { container } = await createPostgreSqlContainer();
 
     // @ts-ignore
     global.localStackContainer = container;

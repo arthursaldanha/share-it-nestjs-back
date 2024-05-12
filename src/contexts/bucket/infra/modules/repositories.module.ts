@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 
 import { ioc } from '@/contexts/shared/infra/ioc';
-import { MySqlFilesRepository } from '@/contexts/bucket/infra/mysql-bucket-repository';
+import { PostgreSqlFilesRepository } from '@/contexts/bucket/infra/postgresql-bucket-repository';
 
 import { AdaptersModule } from './adapters.module';
 
@@ -10,7 +10,7 @@ import { AdaptersModule } from './adapters.module';
   providers: [
     {
       provide: ioc.infrastructure.repositories.filesRepository,
-      useFactory: (mySqlClient) => new MySqlFilesRepository(mySqlClient),
+      useFactory: (mySqlClient) => new PostgreSqlFilesRepository(mySqlClient),
       inject: [ioc.infrastructure.adapters.mySqlClient],
     },
   ],
