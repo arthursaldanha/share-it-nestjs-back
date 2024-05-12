@@ -1,0 +1,39 @@
+version: '3.7'
+
+services:
+  postgres:
+    image: postgres:16.2-alpine3.19
+    container_name: database-share-it
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=share-it
+    volumes:
+      - 'db:/var/lib/postgresql/data'
+    networks:
+      - share-it
+
+  api-share-it:
+    build:
+      context: .
+    container_name: api-share-it
+    ports:
+      - 3001:3001
+    environment:
+      - DATABASE_URL=postgresql://admin:admin@postgres:5432/share-it
+      - CLOUDFLARE_ENDPOINT=${CLOUDFLARE_ENDPOINT}
+      - CLOUDFLARE_ACCESS_KEY_ID=${CLOUDFLARE_ACCESS_KEY_ID}
+      - CLOUDFLARE_SECRET_ACCESS_KEY=${CLOUDFLARE_SECRET_ACCESS_KEY}
+    depends_on:
+      - postgres
+    networks:
+      - share-it
+
+networks:
+  share-it:
+    driver: bridge
+
+volumes:
+  db:
