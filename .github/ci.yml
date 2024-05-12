@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches: 
+      - main
+
+jobs:
+  build-and-push:
+    name: 'Build and Push'
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+    - uses: actions/checkout@v4
+
+    - name: Generate SHA
+    - id: generate_sha
+      run: |
+        SHA=$(echo $GITHUB_SHA | head -c7)
+        echo "sha=$SHA" >> $GITHUB_OUTPUT
+
+    - name: Build the Docker image
+      run: docker build -t saldsdev/share-it-api:${{ steps.generate_sha.outputs.sha }} .
+
